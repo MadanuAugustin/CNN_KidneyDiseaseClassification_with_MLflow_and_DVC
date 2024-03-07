@@ -1,3 +1,23 @@
 
+# to perform run-time augmentation we specify it has true
+AUGMENTATION: True
 
-key : val
+# image size is choosen according to the keras application documentation
+IMAGE_SIZE : [224, 224, 3]  # as per VGG 16 model
+
+# as of now we are choosing very small batch size since it takes time to train the model locally
+BATCH_SIZE : 16
+
+# include_top specifies that we are actually removing the FCN from the VGG-16 and including convolution layers
+INCLUDE_TOP : False
+
+# locally it takes time to train, so we are specifying epochs as only one
+EPOCHS : 1
+
+# since we have two classes in our dataset
+CLASSES : 2
+
+# since we are using pretrained model we are keeping the weights of the model which is trained on imagenet
+WEIGHTS : imagenet
+
+LEARNING_RATE : 0.01
