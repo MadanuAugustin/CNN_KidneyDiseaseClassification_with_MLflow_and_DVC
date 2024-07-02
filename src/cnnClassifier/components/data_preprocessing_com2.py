@@ -18,7 +18,7 @@ class DataPreprocessing:
 
     def directory_creation(self):
         try:
-            logger.info('-----------Entered data-splitting function--------')
+            logger.info('-----------Entered directory_creation function--------')
             # Paths to the new directories
             base_dir = self.config.root_dir
             train_dir = os.path.join(base_dir, 'train')
@@ -37,7 +37,7 @@ class DataPreprocessing:
             os.makedirs(Tumor_val_dir, exist_ok=True)
             os.makedirs(Normal_train_dir, exist_ok=True)
             os.makedirs(Normal_val_dir, exist_ok=True)
-            logger.info(f'-----------existed data-splitting function-------------')
+            logger.info(f'-----------existed directory_creation function-------------')
 
         except Exception as e:
             raise CustomException(e, sys)
@@ -48,15 +48,13 @@ class DataPreprocessing:
     def split_data(self, class_name, src_dir, train_dir, val_dir, val_size=0.2):
         try:
             logger.info(f'-------------Entered split_data function---------------')
-            # obj = self.directory_creation()
+            obj = self.directory_creation()
             src_class_dir = os.path.join(src_dir, class_name)
             filenames = os.listdir(src_class_dir)
     
             train_filenames, val_filenames = train_test_split(filenames, test_size=val_size, random_state=42)
 
-            logger.info(f'--------The shape of train_data is {train_filenames} and validation data is{val_filenames}')
-
-            print(len(train_filenames), len(val_filenames))
+            logger.info(f'-----------The size of train data is : {len(train_filenames)} and validation data is : {len(val_filenames)}-----------------')
     
             for filename in train_filenames:
                 src_file = os.path.join(src_class_dir, filename)
