@@ -3,7 +3,7 @@
 from cnnClassifier.constants import *
 import os
 from cnnClassifier.utils.common import read_yaml, create_directories
-from cnnClassifier.entity.config_entity import (DataIngestionConfig, DataPreprocessingConfig)
+from cnnClassifier.entity.config_entity import (DataIngestionConfig, DataPreprocessingConfig, ModelTrainingConfig)
 import tensorflow as tf
 
 class ConfigurationManager:
@@ -49,6 +49,31 @@ class ConfigurationManager:
 
         return data_preprocessing_config
     
+
+
+    def get_model_training(self) -> ModelTrainingConfig:
+        config = self.config.model_training
+        params = self.params
+
+        create_directories([config.root_dir])
+
+        model_training_config = ModelTrainingConfig(
+            root_dir = config.root_dir,
+            train_data= config.train_data,
+            val_data= config.val_data,
+            base_model_path= config.base_model_path,
+            updated_base_model_path= config.updated_base_model_path,
+            params_augmentation = params.AUGMENTATION,
+            params_image_size = params.IMAGE_SIZE,
+            params_batch_size = params.BATCH_SIZE,
+            params_include_top = params.INCLUDE_TOP,
+            params_epochs = params.EPOCHS,
+            params_classes = params.CLASSES,
+            params_weights = params.WEIGHTS,
+            params_learning_rate = params.LEARNING_RATE
+        )
+
+        return model_training_config
 
 
     

@@ -1,6 +1,6 @@
 
 
-tensorflow
+tensorflow==2.16.2
 pandas
 dvc
 mlflow
