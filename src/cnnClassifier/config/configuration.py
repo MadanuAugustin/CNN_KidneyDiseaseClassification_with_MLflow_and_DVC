@@ -3,7 +3,7 @@
 from cnnClassifier.constants import *
 import os
 from cnnClassifier.utils.common import read_yaml, create_directories
-from cnnClassifier.entity.config_entity import (DataIngestionConfig, DataPreprocessingConfig, ModelTrainingConfig)
+from cnnClassifier.entity.config_entity import (DataIngestionConfig, DataPreprocessingConfig, ModelTrainingConfig, EvaluationConfig)
 import tensorflow as tf
 
 class ConfigurationManager:
@@ -74,7 +74,27 @@ class ConfigurationManager:
         )
 
         return model_training_config
+    
 
+    def get_evaluation_config(self) -> EvaluationConfig:
+
+        config = self.config.model_evaluation
+        params = self.params
+
+        create_directories([config.root_dir])
+        
+        eval_config = EvaluationConfig(
+            root_dir = config.root_dir,
+            path_of_model = config.path_of_model,
+            metric_file_name  = config.metric_file_name,
+            val_data = config.val_data,
+            mlflow_uri = "https://dagshub.com/augustin7766/VGG-16_KidneyDiseaseClassification_with_MLflow_and_DVC.mlflow",
+            all_params = params,
+            params_image_size = params.IMAGE_SIZE,
+            params_batch_size = params.BATCH_SIZE
+        )
+
+        return eval_config
 
     
 

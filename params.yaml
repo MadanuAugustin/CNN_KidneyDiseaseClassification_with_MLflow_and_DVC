@@ -1,6 +1,6 @@
 
 # to perform run-time augmentation we specify it has true
-AUGMENTATION: True
+AUGMENTATION : True
 
 # image size is choosen according to the keras application documentation
 IMAGE_SIZE : [224, 224, 3]  # as per VGG 16 model

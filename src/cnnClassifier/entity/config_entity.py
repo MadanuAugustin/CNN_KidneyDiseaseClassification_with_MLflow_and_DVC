@@ -38,4 +38,17 @@ class ModelTrainingConfig:
     params_weights : str
     params_learning_rate : float
 
+
+
+@dataclass(frozen = True)
+class EvaluationConfig:
+    root_dir : Path
+    path_of_model : Path
+    val_data : Path
+    mlflow_uri : str
+    params_image_size : list
+    params_batch_size : int
+    metric_file_name : Path
+    all_params : dict
+
     
